@@ -1,9 +1,9 @@
 # Файл для обучения
 
-import re   # библеотека регулярных выражений
+import re   # библиотека регулярных выражений
 
 input_dir = input("Здравствуйте, укажите директорию файла, с которого будут считаны данные."
-                  "\n(Пример директории: C:\\Users\\andza\\Desktop\\My_text.txt):")
+                  "\n(Пример директории: C:\\Users\\myPC\\Desktop\\My_text.txt):")
 
 
 def cleaned_text(file):     # Функция привидения текста в токены
@@ -24,8 +24,9 @@ try:
     # f = open("Example_text.txt", "r", encoding="utf-8")
     file = f.read()
     f.close()
-    cleaned_text(file)
+
 
 except FileNotFoundError:   # Считываем текст, введённый вручную
     file = input(f"Файла в директории \"{input_dir}\" нет. Введите текст вручную:")
-    cleaned_text(file)
+
+cleaned_text(file)
