@@ -20,8 +20,6 @@ try:
 
     # Считываем текст с файла в директории
     f = open(input_dir, "r", encoding="utf-8")
-    # C:\Users\andza\AAA\GitHub\Text-Generator\Example_text.txt
-    # f = open("Example_text.txt", "r", encoding="utf-8")
     file = f.read()
     f.close()
 
