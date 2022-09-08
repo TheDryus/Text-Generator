@@ -9,11 +9,15 @@ input_dir = input("Здравствуйте, укажите директорию
 def cleaned_text(file):     # Функция привидения текста в токены
 
     # Очищаем текст от лишних символов
-    cleaned_file = re.sub("[^А-яа-я]", " ", file)
+    cleaned_file = re.sub("[^А-яа-я.]", " ", file)
 
     # Привели токены в порядок путем привидения текста к нижнему регистру и разделением текста с помощью метода split()
-    cleaned_file = cleaned_file.lower().split()
-    return print(cleaned_file)
+    cleaned_file = cleaned_file.lower().split(".")
+    tokinizer = []
+    for i in cleaned_file:
+        i = i.split()
+        tokinizer.append(i)
+    return print(tokinizer)
 
 
 try:
