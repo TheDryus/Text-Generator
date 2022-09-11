@@ -1,7 +1,8 @@
 # Файл для обучения
 
 from gensim.models import Word2Vec as w2v
-from gensim.models import KeyedVectors as kv
+import numpy as np
+
 
 def tokenizer():
     import re  # библиотека регулярных выражений
@@ -53,16 +54,21 @@ def tokenizer():
 
 tokenizer = tokenizer()
 
-f = open("data\\tokenizer.txt", "r", encoding="utf-8")
-tokenizer = f.read()
-f.close()
-
+# f = open("data\\tokenizer.txt", "r", encoding="utf-8")
+# tokenizer =f.read()
+# f.close()
 # print(tokenizer)
+# print(len(tokenizer))
 
-model = w2v(tokenizer,
-            min_count=2
-            )
 
-model = model.wv.most_similar("маленький")
-print(model)
+# dict = {}
+# for i in range(len(tokenizer)):
+#     dict[i] = tokenizer[i]
+# print(dict)
 
+model = w2v(tokenizer, min_count=2)
+vocab = model.wv.key_to_index
+print(vocab)
+
+sim_words = model.wv.most_similar("принц")
+print(sim_words)
