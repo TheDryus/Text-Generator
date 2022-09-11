@@ -1,7 +1,7 @@
 # Файл для обучения
 
 from gensim.models import Word2Vec as w2v
-
+from gensim.models import KeyedVectors as kv
 
 def tokenizer():
     import re  # библиотека регулярных выражений
@@ -25,12 +25,14 @@ def tokenizer():
                 except FileNotFoundError:  # Пропускаем ошибку о том, что файл не найден
                     print(f"Файла \"{input_dir}\" нет.")
                     continue
+
+                # for word in text:
+                #     if len(word) > 1:
                 text += file
 
             if (answer != 1) and (answer != 2):
                 print("Введите \"1\" либо \"2\": ")
                 continue
-
 
         except ValueError:
             print("Введите цифру!")
@@ -40,8 +42,9 @@ def tokenizer():
         .lower() \
         .split()
 
+
     # Записываем результат токенизации в файл
-    f = open("tokenizer.txt", "w", encoding="utf-8")
+    f = open("data\\tokenizer.txt", "w", encoding="utf-8")
     f.write(str(tokenizer))
     f.close()
 
@@ -50,6 +53,16 @@ def tokenizer():
 
 tokenizer = tokenizer()
 
-f = open("tokenizer.txt", "r", encoding="utf-8")
+f = open("data\\tokenizer.txt", "r", encoding="utf-8")
 tokenizer = f.read()
 f.close()
+
+# print(tokenizer)
+
+model = w2v(tokenizer,
+            min_count=2
+            )
+
+model = model.wv.most_similar("маленький")
+print(model)
+
