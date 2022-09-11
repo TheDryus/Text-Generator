@@ -1,34 +1,61 @@
 # Файл для обучения
 
-import re   # библиотека регулярных выражений
+def tokenizer():
+    import re  # библиотека регулярных выражений
 
-input_dir = input("Здравствуйте, укажите директорию файла, с которого будут считаны данные."
-                  "\n(Пример директории: C:\\Users\\myPC\\Desktop\\My_text.txt):")
+    answer = 1
+    text = ''
+    while answer != 2:
+        try:
+            answer = int(input("У вас есть данные, которые вы хотите считать? (1 - Да, 2 - Нет): "))
+
+            if answer == 1:
+                input_dir = input("Здравствуйте, укажите директорию, в которых хранятся файлы."
+                                  "\n(Пример директории: C:\\Users\\myPC\\Desktop\\My_text):")
+                try:
+                    # Считываем текст с файла в директории
+                    f = open(input_dir, "r", encoding="utf-8")
+                    file = f.read()
+                    f.close()
+
+                except FileNotFoundError:  # Пропускаем ошибку о том, что файл не найден
+                    print(f"Файла \"{input_dir}\" нет.")
+                    continue
+                text += file
+
+            if (answer != 1) and (answer != 2):
+                print("Введите \"1\" либо \"2\": ")
+                continue
 
 
-def cleaned_text(file):     # Функция привидения текста в токены
+        except ValueError:
+            print("Введите цифру!")
 
-    # Очищаем текст от лишних символов
-    cleaned_file = re.sub("[^А-яа-я.]", " ", file)
+    tokenizer = re. \
+        sub("[^А-яа-я]", " ", text) \
+        .lower() \
+        .split(" ")
 
-    # Привели токены в порядок путем привидения текста к нижнему регистру и разделением текста с помощью метода split()
-    cleaned_file = cleaned_file.lower().split(".")
-    tokinizer = []
-    for i in cleaned_file:
-        i = i.split()
-        tokinizer.append(i)
-    return print(tokinizer)
+    for whitespace in tokenizer:
+        if len(whitespace) == 0:
+            tokenizer.remove(whitespace)
 
-
-try:
-
-    # Считываем текст с файла в директории
-    f = open(input_dir, "r", encoding="utf-8")
-    file = f.read()
-    f.close()
+    tokenizer.pop()
+    return tokenizer
 
 
-except FileNotFoundError:   # Считываем текст, введённый вручную
-    file = input(f"Файла в директории \"{input_dir}\" нет. Введите текст вручную:")
+tokenizer = tokenizer()
 
-cleaned_text(file)
+print(tokenizer)
+f = open("tokenizer.txt", "w", encoding="utf-8")
+f.write(str(tokenizer))
+f.close()
+# model = w2v(
+#     tokenizer.tokenizer,
+#     min_count=5,
+#     epochs=100,
+#     vector_size=100
+# )
+#
+# model = model.wv.most_similar(["принц"], topn=5)
+# print(model)
