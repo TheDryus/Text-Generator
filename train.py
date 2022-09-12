@@ -67,7 +67,7 @@ tokenizer = tokenizer()
 # print(dict)
 
 model = w2v(tokenizer, vector_size=150, window=10, min_count=2)
-model.train(tokenizer, total_examples=len(tokenizer), epochs=10)
+# model.train(tokenizer, total_examples=len(tokenizer), epochs=10)
 model.save("model.model")
 # vocab = model.wv.key_to_index
 # print(vocab)
